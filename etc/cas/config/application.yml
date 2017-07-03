@@ -1,3 +1,4 @@
 info:
   description: CAS Configuration
 logging.config: file:./build/libs/config/log4j2.xml
+cas.authn.samlIdp.metadata.location: file:./build/libs/config/saml

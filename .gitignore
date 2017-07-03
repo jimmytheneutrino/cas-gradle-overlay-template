@@ -11,6 +11,7 @@ overlays/
 .vscode
 *.iml
 *.ipr
+bin
 
 classes
 .gradle
