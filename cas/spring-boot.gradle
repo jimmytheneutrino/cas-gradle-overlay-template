@@ -1,0 +1,14 @@
+apply plugin: 'org.springframework.boot'
+apply from: 'https://raw.githubusercontent.com/apereo/cas/5.1.x/gradle/overrides.gradle'
+
+bootRepackage {
+    enabled = false
+}
+
+springBoot  {
+    mainClass = "org.springframework.boot.loader.WarLauncher"
+}
+
+bootRun {
+    addResources = true
+}

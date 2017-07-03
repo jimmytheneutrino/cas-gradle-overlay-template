@@ -1,2 +1,3 @@
 info:
   description: CAS Configuration
+logging.config: file:./build/libs/config/log4j2.xml

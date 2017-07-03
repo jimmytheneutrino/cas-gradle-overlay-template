@@ -1,7 +1,7 @@
-apply plugin: 'org.springframework.boot'
 apply from: 'http://dl.bintray.com/scalding/generic/waroverlay.gradle'
-apply from: 'https://raw.githubusercontent.com/apereo/cas/5.1.x/gradle/overrides.gradle'
+//apply from: 'spring-boot.gradle'
 
+/*
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
@@ -18,19 +18,7 @@ idea {
         downloadSources = true
     }
 }
-
-
-bootRepackage {
-    enabled = false
-}
-
-springBoot  {
-    mainClass = "org.springframework.boot.loader.WarLauncher"
-}
-
-bootRun {
-    addResources = true
-}
+*/
 
 repositories {
     mavenLocal()
@@ -41,12 +29,20 @@ repositories {
 
 dependencies {
     compile "org.apereo.cas:cas-server-webapp-tomcat:${project.'cas.version'}@war"
+    compile "org.apereo.cas:cas-server-support-x509-webflow:${project.'cas.version'}"
+    
+   	compile ('ee.sk.digidoc:jdigidoc:3.12.1') {
+		exclude group: 'iaik.pkcs'
+	}
+    
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
 task copyConfig(type: Copy) {
     println "Copying configuration to /etc/cas/config"
     from "${project.rootDir}/etc/cas/config"
-    into '/etc/cas/config'
+    //into '/etc/cas/config'
+    into 'build/libs/config'
 }
 
 war {
@@ -104,7 +100,8 @@ task run {
                 "-Xmx2048M"
                 ]
             args = [
-                "build/libs/cas.war"
+                "build/libs/cas.war",
+                "--cas.standalone.config=build/libs/config"
                 ]
         }
     }
